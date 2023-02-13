@@ -47,6 +47,9 @@
       <script>
          var canvas_b;
          var context_b;
+         var maxT;
+         var avgT;
+         var minT;
 
          setInterval(function ( ){
                var req = new XMLHttpRequest();
@@ -98,8 +101,6 @@
          function drawPixel(x, y, color, context) {
              var roundedX = Math.round(x);
              var roundedY = Math.round(y);
-             console.log("Color = " + color);
-             console.log("Context = " + context);
              context.fillStyle = color || '#000';
              context.fillRect(roundedX, roundedY, 1, 1);
          }
@@ -107,24 +108,29 @@
          function setupCanvas() {
              canvas_b = document.getElementById("my-canvas_b");
              context_b = canvas_b.getContext('2d');
-
-             console.log("canvas assigned = " + canvas_b)
-             console.log("context_b assigned = " + context_b)
+             maxT = document.getElementById("maxT");
+             avgT = document.getElementById("avgT");
+             minT = document.getElementById("minT");
 
              context_b.scale(80,80);
              context_b.filter = 'blur(38px)';
+             context_b.font = "15px Arial";
          }
 
          function fillCanvas(data) {
            var pixelWidth = 16;
            var pixelHeight = 4;
            var colorNumber = 0;
+           maxT.innerHTML = Math.max(...data) + "&degC";
+           avgT.innerHTML = Math.round(data.reduce((a, b) => a + b, 0) / data.length) + "&degC";
+           minT.innerHTML = Math.min(...data) + "&degC";
 
            for(var widthIter = 0; widthIter < pixelWidth; widthIter++) {
              for(var heightIter = 0; heightIter < pixelHeight; heightIter++) {
-               var color = power2color(data[colorNumber])
+               var color = power2color(data[colorNumber]);
                colorNumber++;
                drawPixel(widthIter, heightIter, color, context_b);
+               context_b.fillText(data[colorNumber], widthIter, heightIter);
              }
            }
          }
