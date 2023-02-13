@@ -24,7 +24,7 @@ public class DataController {
 
     @PutMapping("/data")
     public ResponseEntity<String> setData(@Validated @RequestBody DataDto newData) {
-        dataService.setDataDto(newData);
+        dataService.saveNewData(newData);
         return new ResponseEntity<String>("Data updated", HttpStatus.CREATED);
     }
 }
