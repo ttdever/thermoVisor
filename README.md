@@ -10,7 +10,7 @@
     ````
     Request type: PUT
     URL: http://127.0.0.1:8080/data
-    Body exampe (JSON array named "temperatures" with 64 elements):
+    Body example (JSON array named "temperatures" with 64 elements):
     {
         "temperatures" : 
         [1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4]
